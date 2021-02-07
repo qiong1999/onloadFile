@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <heade>
+    <title>显示上传的图片和视频</title>
+    <style>
+      .container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .show {
+        width: 200px;
+        height: 200px;
+        margin: 10px 0;
+        background: pink;
+        background-size: 200px;
+      }
+      #file {
+        margin-top: 100px;
+      }
+    </style>
+  </heade>
+  <body>
+    <div class="container">
+      <input id="file" type="file" />
+      <div id="show" class="show"></div>
+    </div>
+    <script>
+      let file = document.getElementById("file");
+      let show = document.getElementById("show");
+      file.onchange = function (e) {
+        let currentFile = e.target.files[0];
+
+        if (
+          currentFile.type === "image/jpeg" ||
+          currentFile.type === "image/png" ||
+          currentFile.type === "image/gif"
+        ) {
+            showImage(currentFile)
+        }
+      };
+
+      function showImage(file) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+          show.style.backgroundImage = `url(${e.target.result})`;
+        };
+        reader.readAsDataURL(file);
+      }
+    </script>
+  </body>
+</html>
