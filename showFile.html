@@ -1,3 +1,7 @@
+
+<!--
+  将上传的文件显示在前端页面
+-->
 <!DOCTYPE html>
 <html>
   <heade>
@@ -13,7 +17,6 @@
         width: 200px;
         height: 200px;
         margin: 10px 0;
-        background: pink;
         background-size: 200px;
       }
       #file {
@@ -45,7 +48,7 @@
           ) {
             show.innerHTML = `<img src=${e.target.result} alt=图片 />`;
           } else if(file.type="video/mp4"){
-            show.innerHTML = `<video src=${e.target.result} autoplay />`
+            show.innerHTML = `<video src=${e.target.result} autoplay muted />`
           }
         };
         reader.readAsDataURL(file);
