@@ -9,6 +9,7 @@
         transform: translateX(-50%);
       }
       .show {
+        display: flex;
         width: 200px;
         height: 200px;
         margin: 10px 0;
@@ -31,19 +32,21 @@
       file.onchange = function (e) {
         let currentFile = e.target.files[0];
 
-        if (
-          currentFile.type === "image/jpeg" ||
-          currentFile.type === "image/png" ||
-          currentFile.type === "image/gif"
-        ) {
-            showImage(currentFile)
-        }
+        showImage(currentFile);
       };
 
       function showImage(file) {
         let reader = new FileReader();
         reader.onload = function (e) {
-          show.style.backgroundImage = `url(${e.target.result})`;
+          if (
+            file.type === "image/jpeg" ||
+            file.type === "image/png" ||
+            file.type === "image/gif"
+          ) {
+            show.innerHTML = `<img src=${e.target.result} alt=图片 />`;
+          } else if(file.type="video/mp4"){
+            show.innerHTML = `<video src=${e.target.result} autoplay />`
+          }
         };
         reader.readAsDataURL(file);
       }
